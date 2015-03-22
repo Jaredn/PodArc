@@ -1,0 +1,25 @@
+{%  extends "PodArcbase.html" %}
+
+{% block content %}
+<h3>Locations Home Page</h3>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">Information</h1>
+    </div>
+    <div class="panel-body">
+        This application is used to populate "Locations" in your database, which will later be used
+        to create Pods within.
+        <ol>
+            <li><a href="{% url 'locations_datacenter_create' %}">Create Datacenter</a></li>
+            <li><a href="{% url 'locations_cage_create' %}">Create Cage</a></li>
+            <li><a href="{% url 'locations_cagerow_create' %}">Create Cage Row</a></li>
+            <li><a href="{% url 'locations_rack_create' %}">Create Rack</a></li>
+        </ol>
+    </div>
+</div>
+
+
+
+{%  endblock %}
