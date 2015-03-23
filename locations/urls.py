@@ -5,8 +5,8 @@ import locations.views
 urlpatterns = patterns('',
     url(r'^$', locations.views.home, name='locations_home'),
     url(r'^index', locations.views.home,),
-    url(r'^$', locations.views.home, name='locations_datacenter_create'),
-    url(r'^$', locations.views.home, name='locations_cage_create'),
-    url(r'^$', locations.views.home, name='locations_cagerow_create'),
-    url(r'^$', locations.views.home, name='locations_rack_create'),
+    url(r'^datacenter/create$', locations.views.datacenter_create, name='locations_datacenter_create'),
+    url(r'^cage/create$', locations.views.cage_create, name='locations_cage_create'),
+    url(r'^cagerow/create$', locations.views.cagerow_create, name='locations_cagerow_create'),
+    url(r'^rack/create$', locations.views.rack_create, name='locations_rack_create'),
 )

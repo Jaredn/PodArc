@@ -7,10 +7,15 @@ from django.template import RequestContext
 #Import Models
 from models import Datacenters, Cages, CageRows, Racks
 
+#Import Forms from forms.py
+from forms import FormNewDatacenter, FormNewCage, FormNewCageRow, FormNewRack
+
 #Import System Modules
 import re
 import sys
 import json
+
+
 
 
 # Locations.Views #
@@ -18,3 +23,120 @@ import json
 def home(request, template_name='locations_home.html'):
     """ Home page for Locations app """
     return render(request, template_name)
+
+def datacenter_create(request, template_name='locations_datacenter_create.html'):
+    """ View and Create Datacenters """
+
+
+    if request.method == 'POST' and 'CreateDatacenter' in request.POST:
+        form = FormNewDatacenter(request.POST) #create form object
+        if form.is_valid():
+            # Get POST Data from form.cleaned_Data
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            f = Datacenters(name=name, description=description) # create model object
+            f.save() #insert new value into database
+            return redirect('locations_datacenter_create') #Must match a urls.py "name"
+
+    if request.method == 'POST' and 'input_delete_id' in request.POST:
+        #Deactivate / Delete datacenter
+        try:
+            deleteId = int(request.POST['input_delete_id'])
+        except:
+            pass
+        if deleteId >= 1:
+            Datacenters.objects.filter(id=deleteId).update(active=0)
+            return redirect('locations_datacenter_create') #Must match a urls.py "name"
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['datacenters'] = Datacenters.objects.filter(active=1)
+    data['form'] = FormNewDatacenter(request.POST or None) #Not POST or post failed, so make form object either way.
+    return render(request, template_name, data)
+
+def cage_create(request, template_name='locations_cage_create.html'):
+    """ View and Create Cages"""
+
+    if request.method == 'POST' and 'CreateCage' in request.POST:
+        form = FormNewCage(request.POST) #create form object
+        if form.is_valid():
+            # Get POST Data from form.cleaned_Data
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            f = Cages(name=name, description=description) # create model object
+            f.save() #insert new value into database
+            return redirect('locations_cage_create') #Must match a urls.py "name"
+
+    if request.method == 'POST' and 'input_delete_id' in request.POST:
+        #Deactivate / Delete datacenter
+        try:
+            deleteId = int(request.POST['input_delete_id'])
+        except:
+            pass
+        if deleteId >= 1:
+            Cages.objects.filter(id=deleteId).update(active=0)
+            return redirect('locations_cage_create') #Must match a urls.py "name"
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['cages'] = Cages.objects.filter(active=1)
+    data['form'] = FormNewCage(request.POST or None) #Not POST or post failed, so make form object either way.
+    return render(request, template_name, data)
+
+def cagerow_create(request, template_name='locations_cagerow_create.html'):
+    """ View and Create Cage Rows"""
+
+    if request.method == 'POST' and 'CreateCageRow' in request.POST:
+        form = FormNewCageRow(request.POST) #create form object
+        if form.is_valid():
+            # Get POST Data from form.cleaned_Data
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            f = CageRows(name=name, description=description) # create model object
+            f.save() #insert new value into database
+            return redirect('locations_cageRow_create') #Must match a urls.py "name"
+
+    if request.method == 'POST' and 'input_delete_id' in request.POST:
+        #Deactivate / Delete datacenter
+        try:
+            deleteId = int(request.POST['input_delete_id'])
+        except:
+            pass
+        if deleteId >= 1:
+            CageRows.objects.filter(id=deleteId).update(active=0)
+            return redirect('locations_cageRow_create') #Must match a urls.py "name"
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['cageRows'] = CageRows.objects.filter(active=1)
+    data['form'] = FormNewCageRow(request.POST or None) #Not POST or post failed, so make form object either way.
+    return render(request, template_name, data)
+
+def rack_create(request, template_name='locations_rack_create.html'):
+    """ View and Create Racks"""
+
+    if request.method == 'POST' and 'CreateRack' in request.POST:
+        form = FormNewRack(request.POST) #create form object
+        if form.is_valid():
+            # Get POST Data from form.cleaned_Data
+            name = form.cleaned_data['name']
+            description = form.cleaned_data['description']
+            f = Racks(name=name, description=description) # create model object
+            f.save() #insert new value into database
+            return redirect('locations_rack_create') #Must match a urls.py "name"
+
+    if request.method == 'POST' and 'input_delete_id' in request.POST:
+        #Deactivate / Delete datacenter
+        try:
+            deleteId = int(request.POST['input_delete_id'])
+        except:
+            pass
+        if deleteId >= 1:
+            Racks.objects.filter(id=deleteId).update(active=0)
+            return redirect('locations_rack_create') #Must match a urls.py "name"
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['racks'] = Racks.objects.filter(active=1)
+    data['form'] = FormNewRack(request.POST or None) #Not POST or post failed, so make form object either way.
+    return render(request, template_name, data)

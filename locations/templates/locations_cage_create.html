@@ -1,0 +1,81 @@
+{% extends "PodArcbase.html" %}
+
+{% block local_javascript %}
+<script language="Javascript">
+    function updateDeleteIdValue(deleteId){
+        document.getElementById("input_delete_id").value = deleteId;
+        document.getElementById("form_delete").submit();
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">
+            Cages
+            <span class="pull-right"><a href="" class="btn btn-success btn-xs" role="button" type="button" title='New Cage' data-toggle="modal" data-target="#Modal-CreateCage""><span class='glyphicon glyphicon-plus'></span> Create New</a></span>
+        </h1>
+    </div>
+    <div class="panel-body">
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                	<th>Name</th>
+                	<th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in cages %}
+                    <tr>
+                    	<td><a href='' >{{ row.name }} ({{ row }})</a></td>
+                    	<td><a href='' >{{ row.description }} </a></td>
+                        <td><button class="btn btn-danger btn-xs" onclick="updateDeleteIdValue( {{ row.id }} )">Delete</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        Rows: {{ cages.count }}<span class="pull-right"><a href="" class="btn btn-success btn-xs" role="button" type="button" title='New Cage' data-toggle="modal" data-target="#Modal-CreateCage""><span class='glyphicon glyphicon-plus'></span> Create New</a></span>
+    </div>
+</div>
+
+<!-- Hidden Delete Form -->
+<div class="hidden">
+    <form id="form_delete" action="{% url 'locations_cage_create' %}" method="post">
+        {% csrf_token %}
+        <input id="input_delete_id" name="input_delete_id" type="hidden" value="0">
+    </form>
+</div>
+
+<!-- MODALS -->
+<!-- Create Cage -->
+<div class="modal fade" id="Modal-CreateCage" tabindex="-1" role="dialog" aria-labelledby="CreateCageLabel" aria-hidden="true">
+  <div class="modal-dialog modalwide">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		<h4 class="modal-title" id="CreateCageLabel">Create Cage</h4>
+	  </div>
+	  <form action='{% url "locations_cage_create" %}' method="POST">
+	  	  {% csrf_token %}
+          <input type="hidden" name="CreateCage" value="1">
+		  <div class="modal-body">
+            {{ form.as_p }}
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<!-- Submit Button-->
+			<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Create Cage</button>
+		  </div>
+	  </form>
+	</div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+
+{% endblock %}
