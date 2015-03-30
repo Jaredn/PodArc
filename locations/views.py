@@ -56,19 +56,14 @@ def datacenter_create(request, template_name='locations_datacenter_create.html')
 
 def cage_create(request, template_name='locations_cage_create.html'):
     """ View and Create Cages"""
-
     if request.method == 'POST' and 'CreateCage' in request.POST:
         form = FormNewCage(request.POST) #create form object
 
         if form.is_valid():
-            print "VALID"
-            print "POST DATA = ", request.POST
-            print "CLEANED DATA = ", form.cleaned_data
             # Get POST Data from form.cleaned_Data
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
-            datacenter = request.POST['datacenter']
-            print "MY VARIABLES: ", name, description, datacenter
+            datacenter = form.cleaned_data['datacenter'].id #since datacenter is a foreignkey it returns the entire object.  You must reference 'id'.
             f = Cages(name=name, description=description, datacenter_id=datacenter) # create model object
             f.save() #insert new value into database
             return redirect('locations_cage_create') #Must match a urls.py "name"
@@ -98,7 +93,7 @@ def cagerow_create(request, template_name='locations_cagerow_create.html'):
             # Get POST Data from form.cleaned_Data
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
-            cage = request.POST['cage']
+            cage = form.cleaned_data['cage'].id
             f = CageRows(name=name, description=description, cage_id=cage) # create model object
             f.save() #insert new value into database
             return redirect('locations_cagerow_create') #Must match a urls.py "name"
@@ -128,7 +123,7 @@ def rack_create(request, template_name='locations_rack_create.html'):
             # Get POST Data from form.cleaned_Data
             name = form.cleaned_data['name']
             description = form.cleaned_data['description']
-            cagerow = request.POST['cagerow']
+            cagerow = form.cleaned_data['cagerow'].id
             f = Racks(name=name, description=description, cagerow_id=cagerow) # create model object
             f.save() #insert new value into database
             return redirect('locations_rack_create') #Must match a urls.py "name"
