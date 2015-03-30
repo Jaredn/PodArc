@@ -18,7 +18,7 @@ class FormNewCage(ModelForm):
         model = Cages
         exclude = ['active',]
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': u'datacenter name', 'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'placeholder': u'cage name', 'class': 'form-control'}),
             'description': forms.TextInput(attrs={'placeholder': u'description', 'class': 'form-control'})
         }
 
@@ -27,7 +27,7 @@ class FormNewCageRow(ModelForm):
         model = CageRows
         exclude = ['active',]
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': u'datacenter name', 'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'placeholder': u'row name', 'class': 'form-control'}),
             'description': forms.TextInput(attrs={'placeholder': u'description', 'class': 'form-control'})
         }
 
@@ -36,6 +36,6 @@ class FormNewRack(ModelForm):
         model = Racks
         exclude = ['active',]
         widgets = {
-            'name': forms.TextInput(attrs={'placeholder': u'datacenter name', 'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'placeholder': u'rack name', 'class': 'form-control'}),
             'description': forms.TextInput(attrs={'placeholder': u'description', 'class': 'form-control'})
         }
