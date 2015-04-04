@@ -9,4 +9,7 @@ urlpatterns = patterns('',
     url(r'^cage/create$', locations.views.cage_create, name='locations_cage_create'),
     url(r'^cagerow/create$', locations.views.cagerow_create, name='locations_cagerow_create'),
     url(r'^rack/create$', locations.views.rack_create, name='locations_rack_create'),
+
+    #Location Views...
+    url(r'^datacenter/(?P<pk>\d+)$', locations.views.datacenter_by_id, name='locations_rack_create'),
 )

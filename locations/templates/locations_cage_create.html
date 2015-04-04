@@ -51,29 +51,7 @@
 </div>
 
 <!-- MODALS -->
-<!-- Create Cage -->
-<div class="modal fade" id="Modal-CreateCage" tabindex="-1" role="dialog" aria-labelledby="CreateCageLabel" aria-hidden="true">
-  <div class="modal-dialog modalwide">
-	<div class="modal-content">
-	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title" id="CreateCageLabel">Create Cage</h4>
-	  </div>
-	  <form action='{% url "locations_cage_create" %}' method="POST">
-	  	  {% csrf_token %}
-          <input type="hidden" name="CreateCage" value="1">
-		  <div class="modal-body">
-            {{ form.as_p }}
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<!-- Submit Button-->
-			<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Create Cage</button>
-		  </div>
-	  </form>
-	</div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+{% include "locations_modal_cage_create.html" %}
 
 
 

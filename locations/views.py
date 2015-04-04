@@ -143,3 +143,37 @@ def rack_create(request, template_name='locations_rack_create.html'):
     data['racks'] = Racks.objects.filter(active=1)
     data['form'] = FormNewRack(request.POST or None) #Not POST or post failed, so make form object either way.
     return render(request, template_name, data)
+
+
+
+
+#### View Locations (Datacenter/Cage/Rack/Row) by ID
+
+def datacenter_by_id(request, pk, template_name='locations_datacenter_by_id.html'):
+    """ View a datacenter by ID """
+
+
+    # if request.method == 'POST' and 'CreateDatacenter' in request.POST:
+    #     form = FormNewDatacenter(request.POST) #create form object
+    #     if form.is_valid():
+    #         # Get POST Data from form.cleaned_Data
+    #         name = form.cleaned_data['name']
+    #         description = form.cleaned_data['description']
+    #         f = Datacenters(name=name, description=description) # create model object
+    #         f.save() #insert new value into database
+    #         return redirect('locations_datacenter_create') #Must match a urls.py "name"
+    #
+    # if request.method == 'POST' and 'input_delete_id' in request.POST:
+    #     #Deactivate / Delete datacenter
+    #     try:
+    #         deleteId = int(request.POST['input_delete_id'])
+    #     except:
+    #         pass
+    #     if deleteId >= 1:
+    #         Datacenters.objects.filter(id=deleteId).update(active=0)
+    #         return redirect('locations_datacenter_create') #Must match a urls.py "name"
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['this_datacenter'] = Datacenters.objects.filter(id=pk)
+    return render(request, template_name, data)

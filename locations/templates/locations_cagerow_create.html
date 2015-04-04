@@ -51,29 +51,7 @@
 </div>
 
 <!-- MODALS -->
-<!-- Create CageRow -->
-<div class="modal fade" id="Modal-CreateCageRow" tabindex="-1" role="dialog" aria-labelledby="CreateCageRowLabel" aria-hidden="true">
-  <div class="modal-dialog modalwide">
-	<div class="modal-content">
-	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		<h4 class="modal-title" id="CreateCageRowLabel">Create CageRow</h4>
-	  </div>
-	  <form action='{% url "locations_cagerow_create" %}' method="POST">
-	  	  {% csrf_token %}
-          <input type="hidden" name="CreateCageRow" value="1">
-		  <div class="modal-body">
-            {{ form.as_p }}
-		  </div>
-		  <div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<!-- Submit Button-->
-			<button type="submit" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-plus"></span> Create CageRow</button>
-		  </div>
-	  </form>
-	</div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+{% include "locations_modal_cagerow_create.html" %}
 
 
 
