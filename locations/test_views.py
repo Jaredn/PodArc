@@ -59,5 +59,5 @@ class TestLocationsViews(TestCase):
         url = reverse('locations.views.datacenter_create')
         c = Client()
         response = c.post(url, dict(name='test datacenter', description=' a test datacenter'))
-        #todo actually do an assertion here....
+        #todo actually do an assertion here.....
         print response.status_code
