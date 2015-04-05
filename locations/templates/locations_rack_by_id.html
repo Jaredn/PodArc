@@ -1,0 +1,26 @@
+{% extends "PodArcbase.html" %}
+
+{% block local_javascript %}
+{% endblock %}
+
+{% block content %}
+    
+Nav: <a href="{% url "locations_datacenter_view_by_id" this_rack.cagerow.cage.datacenter.id %}">{{ this_rack.cagerow.cage.datacenter.name }}</a> --> <a href="{% url "locations_cage_view_by_id" this_rack.cagerow.cage.id %}">{{ this_rack.cagerow.cage.name }}</a> --> <a href="{% url "locations_cagerow_view_by_id" this_rack.cagerow.id%}">{{ this_rack.cagerow.name }}</a> --> {{ this_rack.name }}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h1 class="panel-title">
+            Rack{{ this_rack }} (id {{ this_rack.id }})
+        </h1>
+    </div>
+    <div class="panel-body">
+        <p>todo: make this a form / editable.</p>
+        <p>name: {{ this_rack.name }}</p>
+        <p>description: {{ this_rack.description }}</p>
+        <p>status: {{ this_rack.status }} (1 is active, 0 is disabled)</p>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>
+
+<!-- MODALS -->
+{% endblock %}

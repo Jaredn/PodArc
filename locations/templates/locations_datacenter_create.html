@@ -29,8 +29,8 @@
             <tbody>
                 {% for row in datacenters %}
                     <tr>
-                    	<td><a href='/locations/datacenter/{{ row.id }}' >{{ row.name }}</a></td>
-                    	<td><a href='/locations/datacenter/{{ row.id }}' >{{ row.description }}</a></td>
+                    	<td><a href='{% url "locations_datacenter_view_by_id" row.id %}' >{{ row.name }}</a></td>
+                    	<td><a href='{% url "locations_datacenter_view_by_id" row.id %}' >{{ row.description }}</a></td>
                         <td><button class="btn btn-danger btn-xs" onclick="updateDeleteIdValue( {{ row.id }} )">Delete</button></td>
                     </tr>
                 {% endfor %}

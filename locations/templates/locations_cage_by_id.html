@@ -4,17 +4,19 @@
 {% endblock %}
 
 {% block content %}
+
+Nav: <a href="{% url "locations_datacenter_view_by_id" this_cage.datacenter.id %}">{{ this_cage.datacenter.name }}</a> --> {{ this_cage.name }}
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h1 class="panel-title">
-            Datacenter {{ this_datacenter }} (id {{ this_datacenter.id }})
+            Cage {{ this_cage }} (id {{ this_cage.id }})
         </h1>
     </div>
     <div class="panel-body">
         <p>todo: make this a form / editable.</p>
-        <p>name: {{ this_datacenter.name }}</p>
-        <p>description: {{ this_datacenter.description }}</p>
-        <p>status: {{ this_datacenter.status }} (1 is active, 0 is disabled)</p>
+        <p>name: {{ this_cage.name }}</p>
+        <p>description: {{ this_cage.description }}</p>
+        <p>status: {{ this_cage.status }} (1 is active, 0 is disabled)</p>
     </div>
     <div class="panel-footer">
     </div>
@@ -23,15 +25,15 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h1 class="panel-title">
-            Cages inside datacenter {{ this_datacenter }} (id {{ this_datacenter.id }})
+            Rows inside cage {{ this_cage }} (id {{ this_cage.id }})
         </h1>
     </div>
     <div class="panel-body">
         <table class="table table-bordered table-condensed table-responsive">
             <p>todo: make these drilldown links</p>
-            {% for row in cage_list %}
+            {% for row in cagerow_list %}
             <tr>
-                <td><a href="{% url "locations_cage_view_by_id" row.id %}">{{ row.name }}</a></td>
+                <td><a href="{% url "locations_cagerow_view_by_id" row.id %}">{{ row.name }}</a></td>
                 <td>{{ row.description }}</td>
                 <td>{{ row.status }}</td>
             </tr>

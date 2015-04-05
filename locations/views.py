@@ -152,28 +152,36 @@ def rack_create(request, template_name='locations_rack_create.html'):
 def datacenter_by_id(request, pk, template_name='locations_datacenter_by_id.html'):
     """ View a datacenter by ID """
 
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['this_datacenter'] = Datacenters.objects.get(id=pk)
+    data['cage_list'] = Cages.objects.filter(datacenter_id=pk)
+    return render(request, template_name, data)
 
-    # if request.method == 'POST' and 'CreateDatacenter' in request.POST:
-    #     form = FormNewDatacenter(request.POST) #create form object
-    #     if form.is_valid():
-    #         # Get POST Data from form.cleaned_Data
-    #         name = form.cleaned_data['name']
-    #         description = form.cleaned_data['description']
-    #         f = Datacenters(name=name, description=description) # create model object
-    #         f.save() #insert new value into database
-    #         return redirect('locations_datacenter_create') #Must match a urls.py "name"
-    #
-    # if request.method == 'POST' and 'input_delete_id' in request.POST:
-    #     #Deactivate / Delete datacenter
-    #     try:
-    #         deleteId = int(request.POST['input_delete_id'])
-    #     except:
-    #         pass
-    #     if deleteId >= 1:
-    #         Datacenters.objects.filter(id=deleteId).update(active=0)
-    #         return redirect('locations_datacenter_create') #Must match a urls.py "name"
+def cage_by_id(request, pk, template_name='locations_cage_by_id.html'):
+    """ View a datacenter by ID """
 
     #Default action for GET, or POST's that fail validation.
     data = {}
-    data['this_datacenter'] = Datacenters.objects.filter(id=pk)
+    data['this_cage'] = Cages.objects.get(id=pk)
+    data['cagerow_list'] = CageRows.objects.filter(cage_id=pk)
+    print "datacenter ID =", data['this_cage'].datacenter.id, data['this_cage'].datacenter.name
+    print "cage id =", data['this_cage'].id, data['this_cage'].name
+    return render(request, template_name, data)
+
+def cagerow_by_id(request, pk, template_name='locations_cagerow_by_id.html'):
+    """ View a datacenter by ID """
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['this_cagerow'] = CageRows.objects.get(id=pk)
+    data['rack_list'] = Racks.objects.filter(cagerow_id=pk)
+    return render(request, template_name, data)
+
+def rack_by_id(request, pk, template_name='locations_rack_by_id.html'):
+    """ View a datacenter by ID """
+
+    #Default action for GET, or POST's that fail validation.
+    data = {}
+    data['this_rack'] = Racks.objects.get(id=pk)
     return render(request, template_name, data)
